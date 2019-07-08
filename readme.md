@@ -70,3 +70,7 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-source software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+######################################################################################################################
+Web App - Sepatu. 
+This web apps, will be used for shoes laundry or etc. Each stage of the washing process will be reported on the index page. To report each washing process, employess must have account for accsses to dashboard page. To using this apps, u can start with open terminal and then type "php artisan migrate"
