@@ -14,6 +14,7 @@
                         {{-- Jika user pegawai telah login--}}
                         
                         @if(Auth::check())
+                            Catatan : {{$order[0]->catatan}}
                              @if($order[0]->status == 0)
                                 
                                 {{ Form::model($order, array('route' => array('updateto1', $order[0]->id_order), 'method' => 'PATCH')) }}
