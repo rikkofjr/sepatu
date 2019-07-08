@@ -30,7 +30,7 @@ class OrderController extends Controller
         $user = Auth::user();
         $datanya = Order::query()
             ->join('tb_order_status', 'tb_order.status' ,'=', 'tb_order_status.no_status')
-            ->select('id_order','atas_nama', 'nohp', 'tb_order.created_at', 'tb_order_status.nama_status')
+            ->select('id_order','atas_nama', 'nohp', 'tb_order.created_at', 'nama_status')
             ->orderBy('id_order', 'desc');
         return Datatables::of($datanya)
             ->addColumn('tglmasuk', function ($datanya){
@@ -79,7 +79,10 @@ class OrderController extends Controller
         $now = now();
         $hash_now = hash('sha256', $now);
         $messages = [
-            'required' => 'Formulir Wajid Diisi',
+            'atas_nama.required' => 'Atas Nama Formulir Wajid Diisi',
+            'nohp.required' => 'Nomor Handphone Formulir Wajid Diisi',
+            'selectedcake.required' => 'Jenis Paket Wajid Diisi',
+            'itemtotal.required' => 'Jumlah Sepatu Wajid Diisi',
         ];
         $this->validate($request, [
             'atas_nama' =>'required',
@@ -136,9 +139,23 @@ class OrderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $id_order)
     {
-        //
+        
+        $messages = [
+            'required' => 'Formulir Wajid Diisi',
+        ];
+        $this->validate($request, [
+            'atas_nama' =>'required',
+            'nohp' =>'required',
+        ],$messages);
+        $order = Order::findOrFail($id_order); //Get order specified by id
+        $order->atas_nama = $request->atas_nama;
+        $order->nohp = $request->nohp;
+        $order->kasir= Auth::user()->id;
+        $order->catatan= $request->catatan;
+        $order->save();
+        return redirect()->route('order.show', array('id_order' => $order->id_order));
     }
 
     /**

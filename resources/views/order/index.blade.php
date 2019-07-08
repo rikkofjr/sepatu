@@ -20,6 +20,8 @@
             <div class="card-header">
                 <h1 class="pull-left text-gray">Order Masuk</h1>
                 <a href="{{route('order.create')}}" class="btn btn-info pull-right">Tambah Orderan</a>
+                <br/>
+                {{count($order)}}
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -29,7 +31,7 @@
                                 <th>Atas Nama</th>
                                 <th name="nohp">Nomor Handphone</th>
                                 <th name="tglmasuk">Tangaal</th>
-                                <th name="nama_status">status</th>
+                                <th name="status">status</th>
                                 <th name="act"></th>
                             </tr>
                         </thead>
@@ -72,7 +74,7 @@
                     {data: 'atas_nama', name: 'atas_nama'},
                     {data: 'nohp', name: 'nohp'},
                     {data: 'tglmasuk', name: 'tglmasuk'},
-                    {data: 'nama_status', name: 'nama_status'},
+                    {data: 'nama_status', name: 'status'},
                     { data: null, name:'act',
                         render: function(data){
                             var edit_button = '<a href="' + data.act + '" class="btn btn-sm btn-primary" role="button" aria-pressed="true">Edit</a>';

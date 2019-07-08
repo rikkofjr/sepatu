@@ -28,6 +28,12 @@
                                 <td>Total</td>
                                 <td>{{number_format($order->harga)}}</td>
                             </tr>
+                            <tr>
+                                <td colspan="2">catatan</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" style="border:0;">{{$order->catatan}}</td>
+                            </tr>
                         </tbody>
                         </table>
 </div>

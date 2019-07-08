@@ -12,11 +12,8 @@
                     <div class="room-review-area mb-100">
                         <h4>Status Sepatu | {{$order[0]->atas_nama}}</h4>
                         {{-- Jika user pegawai telah login--}}
-                        @if(Auth::guest())
-
-                        @endif
-
-                        @if(Auth::user() || hasRole('Super Admin'))
+                        
+                        @if(Auth::check())
                              @if($order[0]->status == 0)
                                 
                                 {{ Form::model($order, array('route' => array('updateto1', $order[0]->id_order), 'method' => 'PATCH')) }}
