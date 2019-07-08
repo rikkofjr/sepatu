@@ -73,4 +73,6 @@ The Laravel framework is open-source software licensed under the [MIT license](h
 
 ######################################################################################################################
 Web App - Sepatu. 
-This web apps, will be used for shoes laundry or etc. Each stage of the washing process will be reported on the index page. To report each washing process, employess must have account for accsses to dashboard page. To using this apps, u can start with open terminal and then type "php artisan migrate"
+This web apps, will be used for shoes laundry or etc. Each stage of the washing process will be reported on the index page. To report each washing process, employess must have account for accsses to dashboard page. Before using this apps, you must export database from db_sepatuku1.sql file, and login as admin user : pass 
+admin : 123456.
+Sorry and, thank you
