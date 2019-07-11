@@ -71,8 +71,10 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 
 The Laravel framework is open-source software licensed under the [MIT license](https://opensource.org/licenses/MIT).
 
-######################################################################################################################
+<hr/>
 Web App - Sepatu. 
-This web apps, will be used for shoes laundry or etc. Each stage of the washing process will be reported on the index page. To report each washing process, employess must have account for accsses to dashboard page. Before using this apps, you must export database from db_sepatuku1.sql file, and login as admin user : pass <br/>>
+This web apps, will be used for shoes laundry or etc. Each stage of the washing process will be reported on the index page. To report each washing process, employess must have account for accsses to dashboard page. Before using this apps, you must export database from db_sepatuku1.sql file, and login as 
+<br/>admin user : pass <br/>
 admin : 123456.<br/>
+employe : 123456<br/>>
 Sorry and, thank you
