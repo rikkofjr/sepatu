@@ -47,6 +47,17 @@
                                     <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
                                     <a href="#"><i class="fa fa-tripadvisor" aria-hidden="true"></i></a>
                                     <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                                    @if(Auth::check())
+                                    <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                        <i class="fa fa-sign-out" title="logout"></i>
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        {{ csrf_field() }}
+                                        </form>
+                                    </a>
+                                    @endif
+                                    @can('Employe Edit Order')
+                                        <a href="/dashboard"><i class="fa fa-edit" title="Dasboard"></i></a>
+                                    @endcan
                                 </div>
                             </div>
                         </div>

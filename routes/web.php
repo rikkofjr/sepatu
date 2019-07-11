@@ -27,8 +27,9 @@ Route::group(['prefix' => 'database/json'], function(){
 });
 //dashboard casheer
 Auth::routes();
-Route::get('/dashboard', 'OrderController@index')->name('dashboard');
-Route::group(['prefix' => 'dashboard'], function () {
+//Route::get('/dashboard', 'OrderController@index')->name('dashboard');
+Route::group(['prefix' => 'dashboard', 'middleware' => 'isEmploye'], function () {
+    Route::get('/', 'OrderController@index')->name('dashboard');
     // First Route
     Route::resource('permissions', 'PermissionController');
     // Second Route

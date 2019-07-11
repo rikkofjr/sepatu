@@ -1,7 +1,7 @@
 <ul class="nav align-items-center d-md-none">
                 <li class="nav-item dropdown">
                     <a class="nav-link nav-link-icon" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="ni ni-bell-55"></i>
+                        <i class="fa fa-bell"></i>
                     </a>
                     <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right" aria-labelledby="navbar-default_dropdown_1">
                         <a class="dropdown-item" href="#">Action</a>
@@ -98,11 +98,32 @@
                             </ul>
                         </div>
                     </li>
+                    @role('Super Admin')
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route ('users.index')}}">
                         <i class="ni ni-pin-3 text-orange"></i> User
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link collapsed" href="#userRolesPermissions" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="userRolesPermissions">
+                            <i class="ni ni-shop text-primary"></i>
+                            <span class="nav-link-text">User Administration</span>
+                        </a>
+                        <div class="collapse" id="userRolesPermissions" style="">
+                            <ul class="nav nav-sm flex-column">
+                                <li class="nav-item">
+                                    <a href="{{route('users.index')}}" class="nav-link">User</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{route('roles.index')}}" class="nav-link">Role</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{route('permissions.index')}}" class="nav-link">Permission</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    @endrole
                 </ul>
                 <!-- Divider -->
                 <hr class="my-3">

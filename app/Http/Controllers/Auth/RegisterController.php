@@ -69,6 +69,6 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'username' => $data['username'],
             'password' => $data['password'],
-        ]);
+        ])->assignRole('Customer');
     }
 }
