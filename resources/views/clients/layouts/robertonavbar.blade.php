@@ -5,7 +5,7 @@
                         <nav class="classy-navbar justify-content-between" id="robertoNav">
 
                             <!-- Logo -->
-                            <a class="nav-brand" href="index.html"><img src="{{asset('/roberto/img/core-img/logo.png')}}" alt=""></a>
+                            <a class="nav-brand" href="/"><img src="{{asset('/roberto/img/core-img/logo.png')}}" alt=""></a>
 
                             <!-- Navbar Toggler -->
                             <div class="classy-navbar-toggler">
@@ -28,7 +28,7 @@
 
                                     <!-- Order Now -->
                                     <div class="book-now-btn ml-3 ml-lg-5">
-                                        <a href="{{URL('/#contact')}}">Hubungi Kami <i class="fa fa-long-arrow-right" aria-hidden="true"></i></a></li>
+                                        <a href="{{URL('/#contact')}}">Hubungi Kami <i class="fa fa-phone" aria-hidden="true"></i></a></li>
                                     </div>
                                 </div>
                                 <!-- Nav End -->

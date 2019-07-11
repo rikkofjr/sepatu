@@ -222,14 +222,82 @@
         </section>
         <!-- Our Room Area End -->
 
+        <!--Blog-->
+        <section class="roberto-blog-area section-padding-100-0">
+            <div class="container">
+                <div class="row">
+                    <!-- Section Heading -->
+                    <div class="col-12">
+                        <div class="section-heading text-center wow fadeInUp" data-wow-delay="100ms" style="visibility: visible; animation-delay: 100ms; animation-name: fadeInUp;">
+                            <h6>Blog</h6>
+                            <h2>Tips & trik, Event DLL</h2>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <!-- Single Post Area -->
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <div class="single-post-area mb-100 wow fadeInUp" data-wow-delay="300ms" style="visibility: visible; animation-delay: 300ms; animation-name: fadeInUp;">
+                            <a href="#" class="post-thumbnail"><img src="{{ asset('roberto/img/bg-img/16.jpg') }}" alt=""></a>
+                            <!-- Post Meta -->
+                            <div class="post-meta">
+                                <a href="#" class="post-date">Jan 02, 2019</a>
+                                <a href="#" class="post-catagory">Event</a>
+                            </div>
+                            <!-- Post Title -->
+                            <a href="#" class="post-title">Learn How To Motivate Yourself</a>
+                            <p>How many free autoresponders have you tried? And how many emails did you get through using them?</p>
+                            <a href="index.html" class="btn continue-btn"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- Single Post Area -->
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <div class="single-post-area mb-100 wow fadeInUp" data-wow-delay="500ms" style="visibility: visible; animation-delay: 500ms; animation-name: fadeInUp;">
+                            <a href="#" class="post-thumbnail"><img src="{{ asset('roberto/img/bg-img/16.jpg') }}" alt=""></a>
+                            <!-- Post Meta -->
+                            <div class="post-meta">
+                                <a href="#" class="post-date">Jan 02, 2019</a>
+                                <a href="#" class="post-catagory">Event</a>
+                            </div>
+                            <!-- Post Title -->
+                            <a href="#" class="post-title">What If Let You Run The Hubble</a>
+                            <p>My point here is that if you have no clue for the answers above you probably are not operating a followup.</p>
+                            <a href="index.html" class="btn continue-btn"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- Single Post Area -->
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <div class="single-post-area mb-100 wow fadeInUp" data-wow-delay="700ms" style="visibility: visible; animation-delay: 700ms; animation-name: fadeInUp;">
+                            <a href="#" class="post-thumbnail"><img src="{{ asset('roberto/img/bg-img/16.jpg') }}" alt=""></a>
+                            <!-- Post Meta -->
+                            <div class="post-meta">
+                                <a href="#" class="post-date">Jan 02, 2019</a>
+                                <a href="#" class="post-catagory">Event</a>
+                            </div>
+                            <!-- Post Title -->
+                            <a href="#" class="post-title">Six Pack Abs The Big Picture</a>
+                            <p>Some good steps to take to ensure you are getting what you need out of a autoresponder include…</p>
+                            <a href="index.html" class="btn continue-btn"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
         <!-- Testimonials Area Start -->
         <section class="roberto-testimonials-area section-padding-100-0" id="testimoni">
             <div class="container">
                 <div class="row align-items-center">
                     <div class="col-12 col-md-6">
                         <div class="testimonial-thumbnail owl-carousel mb-100">
-                            <img src="img/bg-img/10.jpg" alt="">
-                            <img src="img/bg-img/11.jpg" alt="">
+                            <img src="{{asset('roberto/img/bg-img/10.jpg')}}" alt="">
+                            <img src="{{asset('roberto/img/bg-img/11.jpg')}}" alt="">
+                            <img src="{{asset('roberto/img/bg-img/10.jpg')}}" alt="">
+                            <img src="{{asset('roberto/img/bg-img/11.jpg')}}" alt="">
                         </div>
                     </div>
 
