@@ -21,6 +21,8 @@ use Spatie\Permission\Models\Permission;
 use Session;
 use Auth;
 
+use DB;
+
 class OrderController extends Controller
 {
     public function __construct(){
@@ -51,10 +53,20 @@ class OrderController extends Controller
      */
     public function index()
     {
+        $carbon = Carbon::now()->format('m');
+
+        $jumlahHariIni = Order::whereDate('created_at', Carbon::today())->get();
+
+        $jumlahBulanIni = Order::whereMonth('created_at', Carbon::now()->month)->get();
+
+        $jumlahTahunIni = Order::whereYear('created_at', Carbon::now()->year)->get();
+
+        $pendapatanBulanIni = Order::whereMonth('created_at', Carbon::now()->month)->sum('harga');
+        
         $orderstatus = OrderStatus::all();
         $order = Order::all();
         $user = User::all();
-        return view('order.index', compact('order', 'orderstatus','user'));
+        return view('order.index', compact('order', 'orderstatus','user','jumlahHariIni','jumlahBulanIni','jumlahTahunIni', 'pendapatanBulanIni'));
     }
 
     /**
