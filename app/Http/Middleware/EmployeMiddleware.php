@@ -17,7 +17,7 @@ class EmployeMiddleware
      */
     public function handle($request, Closure $next)
     {
-        if(!Auth::user()->hasPermissionTo('Employe Delete Order')){
+        if(!Auth::user()->hasPermissionTo('Employee Edit Order')){
             abort('404');
         }
         return $next($request);
