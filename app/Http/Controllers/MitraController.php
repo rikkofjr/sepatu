@@ -1,5 +1,8 @@
 <?php
-//THis controoller can be using by admin/employe SHoees and magic 
+
+//
+    //this controller can be using while Mitra Shoes and magic has been login
+///
 
 namespace App\Http\Controllers;
 
@@ -24,16 +27,17 @@ use Auth;
 
 use DB;
 
-class OrderController extends Controller
+class MitraController extends Controller
 {
     public function __construct(){
-        $this->middleware(['auth','isEmployee']);
+        $this->middleware(['auth','isMitra']);
     }
     public function dashboardOrderJson(){
         $user = Auth::user();
         $datanya = Order::query()
             ->join('tb_order_status', 'tb_order.status' ,'=', 'tb_order_status.no_status')
             ->select('id_order','atas_nama', 'nohp', 'tb_order.created_at', 'nama_status')
+            ->where('kasir', Auth::user()->id)
             ->orderBy('id_order', 'desc');
         return Datatables::of($datanya)
             ->addColumn('tglmasuk', function ($datanya){
@@ -44,9 +48,6 @@ class OrderController extends Controller
             })
             ->make(true);
     }
-    public function cobadulu(){
-        return view('order.coba');
-    }
     /**
      * Display a listing of the resource.
      *
@@ -56,22 +57,26 @@ class OrderController extends Controller
     {
         $carbon = Carbon::now()->format('m');
 
-        $jumlahHariIni = Order::whereDate('created_at', Carbon::today())->get();
+        $jumlahHariIni = Order::where('kasir',Auth::user()->id)->whereDate('created_at', Carbon::today())->get();
 
         $jumlahBulanIni = Order::whereMonth('created_at', Carbon::now()->month)->get();
 
-        $jumlahTahunIni = Order::whereYear('created_at', Carbon::now()->year)->get();
+        $jumlahTahunIni = Order::where('kasir',Auth::user()->id)->whereYear('created_at', Carbon::now()->year)->get();
+
+        $jumlahSepatuDiterima = Order::where('kasir', Auth::user()->id)->get();
+        $jumlahSepatuDiselesaikan = Order::where('kasir', Auth::user()->id)->where('status', '4')->get();
 
         //$komisi = 15/100;
         $pendapatanHariIni = Order::where('kasir', Auth::user()->id) 
         ->whereDate('created_at', Carbon::today())->sum('harga');
-        $pendapatanBulanIni = Order::whereMonth('created_at', Carbon::now()->month)->sum('harga');
-        $pendapatanTahunIni = Order::whereYear('created_at', Carbon::now()->year)->sum('harga');
+        $pendapatanBulanIni = Order::where('kasir', Auth::user()->id)->whereMonth('created_at', Carbon::now()->month)->sum('harga');
+        $pendapatanTahunIni = Order::where('kasir', Auth::user()->id)->whereYear('created_at', Carbon::now()->year)->sum('harga');
         
         $orderstatus = OrderStatus::all();
         $order = Order::all();
         $user = User::all();
-        return view('order.index', compact('order', 'orderstatus','user','jumlahHariIni','jumlahBulanIni','jumlahTahunIni', 'pendapatanBulanIni', 'pendapatanHariIni'));
+        return view('mitra.index', compact('order', 'orderstatus','user','jumlahHariIni','jumlahBulanIni','jumlahTahunIni', 'pendapatanBulanIni', 'pendapatanHariIni', 'pendapatanTahunIni','jumlahSepatuDiterima','jumlahSepatuDiselesaikan'));
+        //return dd($jumlahSepatuDiselesaikan);
     }
 
     /**
@@ -82,7 +87,7 @@ class OrderController extends Controller
     public function create()
     {
         $paket = OrderPaket::all();
-        return view('order.create', compact('paket'));
+        return view('mitra.create', compact('paket'));
     }
 
     /**
@@ -120,8 +125,7 @@ class OrderController extends Controller
         $order->catatan= $request->catatan;
         $order->remember_token= $request->_token;
         $order->save();
-        return redirect()->route('order.show', array('id_order' => $order->id_order));
-
+        return redirect()->route('mitra.show', array('id_order' => $order->id_order));
     }
 
     /**
@@ -133,7 +137,7 @@ class OrderController extends Controller
     public function show($id_order)
     {
         $order = Order::where('id_order', $id_order)->first();
-        return view ('order.show' , compact ('order'));
+        return view ('mitra.show' , compact ('order'));
     }
 
     /**
@@ -142,11 +146,11 @@ class OrderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id_order)
+    public function edit($id)
     {
         $orderstatus = OrderStatus::all();
         $order = Order::where('id_order', $id_order)->first(); //Find post of id = $id
-        return view ('order.edit', compact('order','orderstatus'));
+        return view ('mitra.edit', compact('order','orderstatus'));
     }
 
     /**
@@ -156,9 +160,8 @@ class OrderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id_order)
+    public function update(Request $request, $id)
     {
-        
         $messages = [
             'required' => 'Formulir Wajid Diisi',
         ];
@@ -172,7 +175,7 @@ class OrderController extends Controller
         $order->kasir= Auth::user()->id;
         $order->catatan= $request->catatan;
         $order->save();
-        return redirect()->route('order.show', array('id_order' => $order->id_order));
+        return redirect()->route('mitra.show', array('id_order' => $order->id_order));
     }
 
     /**
@@ -184,58 +187,5 @@ class OrderController extends Controller
     public function destroy($id)
     {
         //
-    }
-
-    /*
-        Soft Delete Order
-    */
-    public function softdelete($id_order)
-    {
-        $order = Order::findOrFail($id_order);
-    	$order->delete();
-
-    	return redirect()->route('order.index');
-    }
-
-    //Get Status Order 
-    public function status($status)
-    {
-        $orderstatus = OrderStatus::all();
-        $order = Order::where('status', $status)->orderBy('id_order','desc')->take(100)->get(); 
-        return view ('order.status', compact('order','orderstatus'));
-
-    }
-    public function updateto1(Request $request, $id_order)
-    {
-        $updateorder = Order::findOrFail($id_order);
-        $updateorder->status = 1;
-        $updateorder->perubah = Auth::user()->id;
-        $updateorder->save();
-        return redirect('dashboard/orderstatus/1');
-        //return redirect()->route('judul.show', 
-        //        $post->id_judul)->with('flash_message', 
-        //        'Article, '. $post->judul.' updated');
-    }
-    public function updateto2(Request $request, $id_order)
-    {
-        $updateorder = Order::findOrFail($id_order);
-        $updateorder->status = 2;
-        $updateorder->perubah = Auth::user()->id;
-        $updateorder->save();
-        return redirect('dashboard/orderstatus/2');
-        //return redirect()->route('judul.show', 
-        //        $post->id_judul)->with('flash_message', 
-        //        'Article, '. $post->judul.' updated');
-    }
-    public function updateto3(Request $request, $id_order)
-    {
-        $updateorder = Order::findOrFail($id_order);
-        $updateorder->status = 3;
-        $updateorder->perubah = Auth::user()->id;
-        $updateorder->save();
-        return redirect('dashboard/orderstatus/3');
-        //return redirect()->route('judul.show', 
-        //        $post->id_judul)->with('flash_message', 
-        //        'Article, '. $post->judul.' updated');
     }
 }

@@ -24,11 +24,12 @@ Route::get('order/{kode}', 'IndexController@ordershow');
 //grouping "json" data for administrator ( json-dashboard)
 Route::group(['prefix' => 'database/json'], function(){
     Route::get('/order', 'OrderController@dashboardOrderJson')->name('jsonOrder');
+    Route::get('/mitraorder', 'MitraController@dashboardOrderJson')->name('jsonMitraOrder');
 });
 //dashboard casheer
 Auth::routes();
 //Route::get('/dashboard', 'OrderController@index')->name('dashboard');
-Route::group(['prefix' => 'dashboard', 'middleware' => ['isEmploye']], function () {
+Route::group(['prefix' => 'dashboard', 'middleware' => ['isEmployee']], function () {
     Route::get('/', 'OrderController@index')->name('dashboard');
     // First Route
     Route::resource('permissions', 'PermissionController');
@@ -53,7 +54,10 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['isEmploye']], function 
     Route::patch('softdelete/{id_order}', 'OrderController@softdelete')->name('softdeleteorder');
     Route::get('/na', function () {
         return view('welcome');
-    });
-    
-    
+    }); 
+});
+Route::group(['prefix' => 'mitra', 'middleware' => ['isMitra']], function () {
+    //mitra Order
+    Route::get('/', 'MitraController@index');
+    Route::resource('order', 'MitraController');
 });

@@ -288,7 +288,7 @@ input:focus {
   z-index: 9999999;
   top: 0;
   left: 0;
-  background-color: #1cc3b2;
+  background-color: rgba(28,195,178,0.7);
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;

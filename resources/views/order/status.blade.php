@@ -11,6 +11,8 @@
 @section('content')
 {{-- jika memiliki data lebih dari satu --}}
 @if(count($order) > 0)
+<div class="row justify-content-center">
+
     <div class="col-lg-9">
         <div class="card">
             <div class="card-header">
@@ -99,6 +101,7 @@
         return confirm('Are you sure you want to delete?');
      }
 </script>
+</div>
 @endif
 {{-- endof - jika memiliki data lebih dari satu --}}
 @endsection

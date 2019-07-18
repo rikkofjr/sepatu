@@ -1,4 +1,4 @@
-@extends('layouts.argon')
+@extends('mitra.layouts.argon')
 @section('title', 'Data Order Masuk')
 @section('dynamic-script')
     <!-- DataTables -->
@@ -15,14 +15,14 @@
 @section('content')
 {{-- jika memiliki data lebih dari satu --}}
 @if(count($order) > 0)
-<div class="row justify-content-center">
-    <div class="col-xl-3 col-lg-6">
+    <div class="row justify-content-center">
+        <div class="col-xl-3 col-lg-6">
             <div class="card card-stats mb-4 mb-xl-0">
                 <div class="card-body">
                     <div class="row">
                         <div class="col">
-                            <h5 class="card-title text-uppercase text-muted mb-0">Order</h5>
-                            <span class="h2 font-weight-bold mb-0">Rp {{number_format($pendapatanHariIni*15/100)}}</span>
+                            <h5 class="card-title text-uppercase text-muted mb-0">Diterima</h5>
+                            <span class="h2 font-weight-bold mb-0">{{count($jumlahSepatuDiterima)}}</span>
                         </div>
                         <div class="col-auto">
                             <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
@@ -31,7 +31,47 @@
                         </div>
                     </div>
                     <p class="mt-3 mb-0 text-muted text-sm">
-                        <span class="text-nowrap">{{count($jumlahHariIni)}} - Order Hari Ini</span>
+                        <span class="text-nowrap">Transaksi Keseluruhan</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-lg-6">
+            <div class="card card-stats mb-4 mb-xl-0">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <h5 class="card-title text-uppercase text-muted mb-0">Diselesaikan</h5>
+                            <span class="h2 font-weight-bold mb-0">{{count($jumlahSepatuDiselesaikan)}}</span>
+                        </div>
+                        <div class="col-auto">
+                            <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
+                                <i class="fas fa-chart-bar"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="mt-3 mb-0 text-muted text-sm">
+                        <span class="text-nowrap">Transaksi Keseluruhan</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-lg-6">
+            <div class="card card-stats mb-4 mb-xl-0">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <h5 class="card-title text-uppercase text-muted mb-0">Pendapatan</h5>
+                            <span class="h2 font-weight-bold mb-0">Rp {{number_format($pendapatanHariIni*15/100)}}</span>
+                        </div>
+                        <div class="col-auto">
+                            <div class="icon icon-shape bg-success text-white rounded-circle shadow">
+                                <i class="fas fa-coins"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="mt-3 mb-0 text-muted text-sm">
+                        <span class="text-nowrap">{{count($jumlahHariIni)}} Transaksi Hari Ini</span>
                     </p>
                     <!-- Progrees <div class="progress">
                         <div class="progress-bar bg-info" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="{{count($order)}}" style="width: 60%;"></div>
@@ -45,48 +85,8 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col">
-                            <h5 class="card-title text-uppercase text-muted mb-0">Order</h5>
-                            <span class="h2 font-weight-bold mb-0">{{count($jumlahBulanIni)}}</span>
-                        </div>
-                        <div class="col-auto">
-                            <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
-                                <i class="fas fa-chart-bar"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <p class="mt-3 mb-0 text-muted text-sm">
-                        <span class="text-nowrap">Order Bulan Ini</span>
-                    </p>
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-3 col-lg-6">
-            <div class="card card-stats mb-4 mb-xl-0">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col">
-                            <h5 class="card-title text-uppercase text-muted mb-0">Order</h5>
-                            <span class="h2 font-weight-bold mb-0">{{count($jumlahTahunIni)}}</span>
-                        </div>
-                        <div class="col-auto">
-                            <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
-                                <i class="fas fa-chart-bar"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <p class="mt-3 mb-0 text-muted text-sm">
-                        <span class="text-nowrap">Order Tahun Ini</span>
-                    </p>
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-3 col-lg-6">
-            <div class="card card-stats mb-4 mb-xl-0">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col">
                             <h5 class="card-title text-uppercase text-muted mb-0">Pendapatan</h5>
-                            <span class="h2 font-weight-bold mb-0">Rp {{number_format($pendapatanBulanIni)}}</span>
+                            <span class="h2 font-weight-bold mb-0">Rp {{number_format($pendapatanTahunIni*15/100)}}</span>
                         </div>
                         <div class="col-auto">
                             <div class="icon icon-shape bg-success text-white rounded-circle shadow">
@@ -95,18 +95,19 @@
                         </div>
                     </div>
                     <p class="mt-3 mb-0 text-muted text-sm">
-                        <span class="text-nowrap">Pendapatan Bulan Ini</span>
+                        <span class="text-nowrap">{{count($jumlahTahunIni)}} Transaksi Tahun Ini</span>
                     </p>
                 </div>
             </div>
         </div>
-        <div class="col-lg-9">
-            <div class="card">
+    </div>
+    <div class="row mt-5">
+        <div class="col-xl-9 col-lg-12">
+            <div class="card card-stats mb-4 mb-xl-0">
                 <div class="card-header">
                     <h1 class="pull-left text-gray">Order Masuk</h1>
                     <a href="{{route('order.create')}}" class="btn btn-info pull-right">Tambah Orderan</a>
                     <br/>
-                    {{count($order)}}
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -131,9 +132,9 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-3">
-            <div class="card">
-                <div class="card-header">Jenis Status</div>
+        <div class="col-xl-3 col-lg-12">
+            <div class="card card-stats mb-4 mb-xl-0">
+                <div class="card-header">Tahapan Pengerjaan</div>
                 <div class="card-body">
                     @foreach($orderstatus as $ordrsts)
                         <table class="table table-stripped">
@@ -142,6 +143,13 @@
                             </tr>
                         </table>
                     @endforeach
+                </div>
+            </div>
+            <div class="card card-stats mb-4 mb-xl-0">
+                <div class="card-body">
+                    <div class="progress">
+                        <div class="progress-bar bg-info" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="{{count($order)}}" style="width: 60%;"></div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -154,18 +162,18 @@
                 var table = $('.data-table').DataTable({
                     processing: true,
                     serverSide: true,
-                    ajax: "{{ route('jsonOrder') }}",
+                    ajax: "{{ route('jsonMitraOrder') }}",
                     columns: [
                         {data: 'atas_nama', name: 'atas_nama'},
                         {data: 'nohp', name: 'nohp'},
                         {data: 'tglmasuk', name: 'tglmasuk'},
                         {data: 'nama_status', name: 'status'},
-                        { data: null, name:'act',
-                            render: function(data){
-                                var edit_button = '<a href="' + data.act + '" class="btn btn-sm btn-primary" role="button" aria-pressed="true">Edit</a>';
-                                return edit_button;
-                            }
-                        }
+                        //{ data: null, name:'act',
+                        //    render: function(data){
+                        //        var edit_button = '<a href="' + data.act + '" class="btn btn-sm btn-primary" role="button" aria-pressed="true">Edit</a>';
+                        //        return edit_button;
+                        //    }
+                        //}
                     ]
                 });
             });
