@@ -146,11 +146,17 @@ class MitraController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($id_order)
     {
         $orderstatus = OrderStatus::all();
         $order = Order::where('id_order', $id_order)->first(); //Find post of id = $id
+        //$kasirnya = Order::where('kasir', Auth::user()->id)->;
+        if(!Order::where('kasir', Auth::user()->id)->where('id_order', $id_order)->first()){
+           abort('404');
+        }
         return view ('mitra.edit', compact('order','orderstatus'));
+        //abort('404');
+        //return dd($kasirnya,$order);
     }
 
     /**

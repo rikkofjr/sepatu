@@ -168,12 +168,12 @@
                         {data: 'nohp', name: 'nohp'},
                         {data: 'tglmasuk', name: 'tglmasuk'},
                         {data: 'nama_status', name: 'status'},
-                        //{ data: null, name:'act',
-                        //    render: function(data){
-                        //        var edit_button = '<a href="' + data.act + '" class="btn btn-sm btn-primary" role="button" aria-pressed="true">Edit</a>';
-                        //        return edit_button;
-                        //    }
-                        //}
+                        { data: null, name:'act',
+                            render: function(data){
+                               var edit_button = '<a href="' + data.act + '" class="btn btn-sm btn-primary" role="button" aria-pressed="true">Edit</a>';
+                                return edit_button;
+                            }
+                        }
                     ]
                 });
             });
