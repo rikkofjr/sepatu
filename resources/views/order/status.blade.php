@@ -60,6 +60,22 @@
                                 {{ Form::close() }}
                                 
                                 @endif
+                                @if($ordr->status == 3)
+                                
+                                {{ Form::model($ordr, array('route' => array('updateto4', $ordr->id_order), 'method' => 'PATCH')) }}
+                                <input type="hidden" name="id_order" value="{{$ordr->id_order}}">
+                                {{ Form::submit($ordr->statusnya->nama_status, array('class' => $ordr->statusnya->kodewarna)) }}
+                                {{ Form::close() }}
+                                
+                                @endif
+                                @if($ordr->status == 4)
+                                
+                                {{ Form::model($ordr, array('route' => array('updateto5', $ordr->id_order), 'method' => 'PATCH')) }}
+                                <input type="hidden" name="id_order" value="{{$ordr->id_order}}">
+                                {{ Form::submit($ordr->statusnya->nama_status, array('class' => $ordr->statusnya->kodewarna)) }}
+                                {{ Form::close() }}
+                                
+                                @endif
                             </td>
                         </tr>
                         @endforeach

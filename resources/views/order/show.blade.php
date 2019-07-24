@@ -5,6 +5,7 @@
 <br/>
 <div style="width:140px;text-align:center;margin:0 auto;padding:0 auto;">
 {!! DNS2D::getBarcodeHTML('http://127.0.0.1:8000/status?checkstatus='.$order->kode, "QRCODE" , 4,4) !!}
+<a href="{{URL ('status?checkstatus='.$order->kode)}}">Copy Link</a>
 <a href="{{URL::previous()}}">Back</a>
 </div>
 <style>

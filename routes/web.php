@@ -28,6 +28,8 @@ Route::group(['prefix' => 'database/json'], function(){
 });
 //dashboard casheer
 Auth::routes();
+Auth::routes(['verify' => true]);
+
 //Route::get('/dashboard', 'OrderController@index')->name('dashboard');
 Route::group(['prefix' => 'dashboard', 'middleware' => ['isEmployee']], function () {
     Route::get('/', 'OrderController@index')->name('dashboard');
@@ -50,14 +52,18 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['isEmployee']], function
     Route::patch('updateto2/{id_order}/update','OrderController@updateto2')->name('updateto2');
     //Update Order to Status = 3 
     Route::patch('updateto3/{id_order}/update','OrderController@updateto3')->name('updateto3');
+    //Update Order to Status = 4 
+    Route::patch('updateto4/{id_order}/update','OrderController@updateto4')->name('updateto4');
+    //Update Order to Status = 5 
+    Route::patch('updateto5/{id_order}/update','OrderController@updateto5')->name('updateto5');
     //Delete Order 
     Route::patch('softdelete/{id_order}', 'OrderController@softdelete')->name('softdeleteorder');
     Route::get('/na', function () {
         return view('welcome');
     }); 
 });
-Route::group(['prefix' => 'mitra', 'middleware' => ['isMitra']], function () {
+Route::group(['prefix' => 'mitra'], function () {
     //mitra Order
     Route::get('/', 'MitraController@index');
-    Route::resource('order', 'MitraController');
+    Route::resource('mitraOrder', 'MitraController');
 });

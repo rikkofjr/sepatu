@@ -15,14 +15,14 @@
 @section('content')
 {{-- jika memiliki data lebih dari satu --}}
 @if(count($order) > 0)
-<div class="row justify-content-center">
+<div class="row mt-5 justify-content-center">
     <div class="col-xl-3 col-lg-6">
             <div class="card card-stats mb-4 mb-xl-0">
                 <div class="card-body">
                     <div class="row">
                         <div class="col">
-                            <h5 class="card-title text-uppercase text-muted mb-0">Order</h5>
-                            <span class="h2 font-weight-bold mb-0">Rp {{number_format($pendapatanHariIni*15/100)}}</span>
+                            <h5 class="card-title text-uppercase text-muted mb-0">Mitra</h5>
+                            <span class="h2 font-weight-bold mb-0">{{count($jumlahMitra)}}</span>
                         </div>
                         <div class="col-auto">
                             <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
@@ -31,7 +31,7 @@
                         </div>
                     </div>
                     <p class="mt-3 mb-0 text-muted text-sm">
-                        <span class="text-nowrap">{{count($jumlahHariIni)}} - Order Hari Ini</span>
+                        <span class="text-nowrap">Jumlah Mitra</span>
                     </p>
                     <!-- Progrees <div class="progress">
                         <div class="progress-bar bg-info" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="{{count($order)}}" style="width: 60%;"></div>
@@ -100,7 +100,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-9">
+        <div class="mt-3 col-lg-9">
             <div class="card">
                 <div class="card-header">
                     <h1 class="pull-left text-gray">Order Masuk</h1>
@@ -117,7 +117,7 @@
                                     <th name="nohp">Nomor Handphone</th>
                                     <th name="tglmasuk">Tangaal</th>
                                     <th name="status">status</th>
-                                    <th name="act"></th>
+                                    <th name="name">Kasir</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -131,7 +131,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-3">
+        <div class="mt-3 col-lg-3">
             <div class="card">
                 <div class="card-header">Jenis Status</div>
                 <div class="card-body">
@@ -156,16 +156,16 @@
                     serverSide: true,
                     ajax: "{{ route('jsonOrder') }}",
                     columns: [
-                        {data: 'atas_nama', name: 'atas_nama'},
+                        {data: null, name:'atas_nama',
+                            render: function(data){
+                                var edit_button = '<a href="' + data.act + '" class="" role="button" aria-pressed="true">'+data.atas_nama+'</a>';
+                                return edit_button;
+                            }
+                        },
                         {data: 'nohp', name: 'nohp'},
                         {data: 'tglmasuk', name: 'tglmasuk'},
                         {data: 'nama_status', name: 'status'},
-                        { data: null, name:'act',
-                            render: function(data){
-                                var edit_button = '<a href="' + data.act + '" class="btn btn-sm btn-primary" role="button" aria-pressed="true">Edit</a>';
-                                return edit_button;
-                            }
-                        }
+                        {data: 'name', name: 'name'}
                     ]
                 });
             });

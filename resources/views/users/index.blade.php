@@ -25,6 +25,7 @@
                         <th scope="col">Username</th>
                         <th scope="col">Nama</th>
                         <th scope="col">Email</th>
+                        <th scope="col">Role</th>
                         <th scope="col">Tanggal Masuk</th>
                     </tr>
                     </thead>
@@ -33,7 +34,14 @@
                         <tr>
                             <td><a href="{{ route ('users.edit',['ordr' => $usr->id]) }}">{{$usr->username}}</a></td><td>{{$usr->name}}</td>
                             <td>
-                                {{$usr->email}}
+                                {{$usr->email}}<br/>
+                            </td>
+                            <td>
+                                @if(!empty($usr->getRoleNames()))
+                                    @foreach($usr->getRoleNames() as $v)
+                                    <label class="badge badge-success">{{ $v }}</label>
+                                    @endforeach
+                                @endif
                             </td>
                             <td>{{$usr->created_at->format('d/m/Y | H:i')}}</td>
                             

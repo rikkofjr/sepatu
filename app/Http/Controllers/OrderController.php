@@ -33,7 +33,8 @@ class OrderController extends Controller
         $user = Auth::user();
         $datanya = Order::query()
             ->join('tb_order_status', 'tb_order.status' ,'=', 'tb_order_status.no_status')
-            ->select('id_order','atas_nama', 'nohp', 'tb_order.created_at', 'nama_status')
+            ->join('users', 'tb_order.kasir' ,'=', 'users.id')
+            ->select('id_order','atas_nama', 'nohp', 'tb_order.created_at', 'nama_status', 'name')
             ->orderBy('id_order', 'desc');
         return Datatables::of($datanya)
             ->addColumn('tglmasuk', function ($datanya){
@@ -56,6 +57,8 @@ class OrderController extends Controller
     {
         $carbon = Carbon::now()->format('m');
 
+        $jumlahMitra = User::role('Mitra')->get();
+
         $jumlahHariIni = Order::whereDate('created_at', Carbon::today())->get();
 
         $jumlahBulanIni = Order::whereMonth('created_at', Carbon::now()->month)->get();
@@ -71,7 +74,17 @@ class OrderController extends Controller
         $orderstatus = OrderStatus::all();
         $order = Order::all();
         $user = User::all();
-        return view('order.index', compact('order', 'orderstatus','user','jumlahHariIni','jumlahBulanIni','jumlahTahunIni', 'pendapatanBulanIni', 'pendapatanHariIni'));
+        return view('order.index', compact(
+            'order', 
+            'orderstatus',
+            'user',
+            'jumlahHariIni',
+            'jumlahBulanIni',
+            'jumlahTahunIni', 
+            'pendapatanBulanIni', 
+            'pendapatanHariIni',
+            'jumlahMitra'
+        ));
     }
 
     /**
@@ -205,6 +218,10 @@ class OrderController extends Controller
         return view ('order.status', compact('order','orderstatus'));
 
     }
+
+    /*
+        this function, used for updating each step of shoes.
+    */
     public function updateto1(Request $request, $id_order)
     {
         $updateorder = Order::findOrFail($id_order);
@@ -234,6 +251,28 @@ class OrderController extends Controller
         $updateorder->perubah = Auth::user()->id;
         $updateorder->save();
         return redirect('dashboard/orderstatus/3');
+        //return redirect()->route('judul.show', 
+        //        $post->id_judul)->with('flash_message', 
+        //        'Article, '. $post->judul.' updated');
+    }
+    public function updateto4(Request $request, $id_order)
+    {
+        $updateorder = Order::findOrFail($id_order);
+        $updateorder->status = 4;
+        $updateorder->perubah = Auth::user()->id;
+        $updateorder->save();
+        return redirect('dashboard/orderstatus/4');
+        //return redirect()->route('judul.show', 
+        //        $post->id_judul)->with('flash_message', 
+        //        'Article, '. $post->judul.' updated');
+    }
+    public function updateto5(Request $request, $id_order)
+    {
+        $updateorder = Order::findOrFail($id_order);
+        $updateorder->status = 5;
+        $updateorder->perubah = Auth::user()->id;
+        $updateorder->save();
+        return redirect('dashboard/orderstatus/5');
         //return redirect()->route('judul.show', 
         //        $post->id_judul)->with('flash_message', 
         //        'Article, '. $post->judul.' updated');
