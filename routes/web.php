@@ -62,8 +62,8 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['isEmployee']], function
         return view('welcome');
     }); 
 });
-Route::group(['prefix' => 'mitra'], function () {
+Route::group(['prefix' => 'mitra', 'as' => 'mitra'], function (){
     //mitra Order
     Route::get('/', 'MitraController@index');
-    Route::resource('mitraOrder', 'MitraController');
+    Route::resource('order', 'MitraController');
 });

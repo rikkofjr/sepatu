@@ -13,7 +13,7 @@
                         <h4>Status Sepatu | {{$order[0]->atas_nama}}</h4>
                         {{-- Jika user pegawai telah login--}}
                         
-                        @if(Auth::check())
+                        @can('Employee Edit Order')
                             Catatan : {{$order[0]->catatan}}
                              @if($order[0]->status == 0)
                                 
@@ -41,7 +41,7 @@
                                 {{ Form::close() }}
                                 
                                 @endif
-                        @endif
+                        @endcan
                         <!-- Single Review Area -->
                         @if($order[0]->status == 0)
                         <div class="single-room-review-area d-flex align-items-center">

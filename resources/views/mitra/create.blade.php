@@ -20,7 +20,7 @@
                 <h1 class="text-gray">Buat Order Baru</h1>
             </div>
             <div class="card-body">
-                {{ Form::open(array('route' => 'mitraOrder.store', 'id' => 'cakeform')) }}
+                {{ Form::open(array('route' => 'mitraorder.store', 'id' => 'cakeform')) }}
                 <div class="form-group">
                     {{ Form::label('atas_nama', 'Nama', array('class' => 'form-control-label')) }}
                     {{ Form::text('atas_nama', '', array('class' => 'form-control form-control-alternative')) }}

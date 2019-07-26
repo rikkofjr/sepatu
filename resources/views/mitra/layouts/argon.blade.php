@@ -43,7 +43,7 @@
                 <img src="../assets/img/brand/blue.png" class="navbar-brand-img" alt="...">
             </a>
             <!-- User -->
-            @include('layouts.navbar')
+            @include('mitra.layouts.navbar')
         </div>
     </nav>
   <!-- Main content -->

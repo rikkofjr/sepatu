@@ -47,7 +47,7 @@ class MitraController extends Controller
                 return $datanya->created_at ? with (new carbon($datanya->created_at))->format('d/m/Y | H:i') : '';
             })
             ->addColumn('act', function ($datanya) {
-                return route('mitraOrder.edit', $datanya->id_order);
+                return route('mitraorder.edit', $datanya->id_order);
             })
             ->make(true);
     }
@@ -90,7 +90,7 @@ class MitraController extends Controller
     public function create()
     {
         $paket = OrderPaket::all();
-        return view('order.create', compact('paket'));
+        return view('mitra.create', compact('paket'));
     }
 
     /**
@@ -128,7 +128,7 @@ class MitraController extends Controller
         $order->catatan= $request->catatan;
         $order->remember_token= $request->_token;
         $order->save();
-        return redirect()->route('order.show', array('id_order' => $order->id_order));
+        return redirect()->route('mitraorder.show', array('id_order' => $order->id_order));
     }
 
     /**
@@ -140,7 +140,11 @@ class MitraController extends Controller
     public function show($id_order)
     {
         $order = Order::where('id_order', $id_order)->first();
-        return view ('order.show' , compact ('order'));
+        if (Auth::user()->id === $order->kasir){
+            return view ('mitra.show' , compact ('order'));
+        }else{
+            abort('404');
+        }
     }
 
     /**
@@ -153,13 +157,12 @@ class MitraController extends Controller
     {
         $orderstatus = OrderStatus::all();
         $order = Order::where('id_order', $id_order)->first(); //Find post of id = $id
-        //$kasirnya = Order::where('kasir', Auth::user()->id)->;
-        if(!Order::where('kasir', Auth::user()->id)->where('id_order', $id_order)->first()){
-           abort('404');
+        //
+        if(Auth::user()->id === $order->kasir){
+            return view ('order.edit', compact('order','orderstatus'));
+        }else{
+            abort('404');
         }
-        return view ('order.edit', compact('order','orderstatus'));
-        //abort('404');
-        //return dd($kasirnya,$order);
     }
 
     /**
@@ -184,7 +187,7 @@ class MitraController extends Controller
         $order->kasir= Auth::user()->id;
         $order->catatan= $request->catatan;
         $order->save();
-        return redirect()->route('order.show', array('id_order' => $order->id_order));
+        return redirect()->route('mitraorder.show', array('id_order' => $order->id_order));
     }
 
     /**

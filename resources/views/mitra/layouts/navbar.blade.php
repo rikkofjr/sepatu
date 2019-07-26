@@ -78,7 +78,7 @@
                 <!-- Navigation -->
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route ('dashboard')}}">
+                        <a class="nav-link" href="{{ route ('mitra')}}">
                         <i class="ni ni-tv-2 text-primary"></i> Dashboard
                         </a>
                     </li>
@@ -90,40 +90,14 @@
                         <div class="collapse" id="navbar-dashboards" style="">
                             <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
-                                <a href="{{route('order.index')}}" class="nav-link">Order</a>
+                                <a href="{{route('mitraorder.index')}}" class="nav-link">Order</a>
                             </li>
                             <li class="nav-item">
-                            <a href="{{route('order.create')}}" class="nav-link">Buat Order</a>
+                            <a href="{{route('mitraorder.create')}}" class="nav-link">Buat Order</a>
                             </li>
                             </ul>
                         </div>
                     </li>
-                    @role('Super Admin')
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route ('users.index')}}">
-                        <i class="ni ni-pin-3 text-orange"></i> User
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link collapsed" href="#userRolesPermissions" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="userRolesPermissions">
-                            <i class="ni ni-shop text-primary"></i>
-                            <span class="nav-link-text">User Administration</span>
-                        </a>
-                        <div class="collapse" id="userRolesPermissions" style="">
-                            <ul class="nav nav-sm flex-column">
-                                <li class="nav-item">
-                                    <a href="{{route('users.index')}}" class="nav-link">User</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{route('roles.index')}}" class="nav-link">Role</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{route('permissions.index')}}" class="nav-link">Permission</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-                    @endrole
                 </ul>
                 <!-- Divider -->
                 <hr class="my-3">
