@@ -1,7 +1,7 @@
 <?php
 
 //
-    //this controller can be using while Mitra Shoes and magic has been login
+    //this controller can be using when Mitra Shoes and magic has been login
     
 ///
 
@@ -159,7 +159,7 @@ class MitraController extends Controller
         $order = Order::where('id_order', $id_order)->first(); //Find post of id = $id
         //
         if(Auth::user()->id === $order->kasir){
-            return view ('order.edit', compact('order','orderstatus'));
+            return view ('mitra.edit', compact('order','orderstatus'));
         }else{
             abort('404');
         }
@@ -172,7 +172,7 @@ class MitraController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $id_order)
     {
         $messages = [
             'required' => 'Formulir Wajid Diisi',
@@ -196,8 +196,11 @@ class MitraController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id_order)
     {
-        //
+        $order = Order::findOrFail($id_order);
+    	$order->delete();
+
+    	return redirect()->route('mitraorder.index');
     }
 }

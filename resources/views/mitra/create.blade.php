@@ -1,4 +1,4 @@
-@extends('layouts.argon')
+@extends('mitra.layouts.argon')
 @section('title')
     Buat Order Baru
 @endsection

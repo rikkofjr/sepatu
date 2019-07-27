@@ -1,4 +1,4 @@
-@extends('layouts.argon')
+@extends('mitra.layouts.argon')
 @section('title')
     Edit Order {{$order->atas_nama}}
 @endsection
@@ -13,7 +13,7 @@
                 <h1 class="text-white">Buat Order Baru</h1>
             </div>
             <div class="card-body">
-            {{ Form::model($order, array('route' => array('order.update', $order->id_order), 'method' => 'PUT')) }}
+            {{ Form::model($order, array('route' => array('mitraorder.update', $order->id_order), 'method' => 'PUT')) }}
                 <div class="form-group">
                     {{ Form::label('atas_nama', 'Nama', array('class' => 'form-control-label')) }}
                     {{ Form::text('atas_nama', null, array('class' => 'form-control form-control-alternative')) }}
@@ -56,7 +56,7 @@
                 <br/>
 
                 {{ Form::submit('Edit', array('class' => 'btn btn-primary')) }}{{ Form::close() }} 
-                {!! Form::open(['method' => 'PATCH', 'route' => ['softdeleteorder', $order->id_order] ]) !!}{!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}{!! Form::close() !!}
+                {!! Form::open(['method' => 'PATCH', 'route' => ['mitraorder.destroy', $order->id_order] ]) !!}{!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}{!! Form::close() !!}
 
             </div>
             <div class="card-footer">
